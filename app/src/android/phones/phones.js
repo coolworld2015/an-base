@@ -72,10 +72,9 @@ class Phones extends Component {
 		});
     }
 	
-    goSearch(rowData) {
+    goSearch() {
 		this.props.navigator.push({
-			index: 2,
-			data: rowData
+			index: 2
 		});
     }
 	
@@ -187,7 +186,7 @@ class Phones extends Component {
 					</View>						
 					<View>
 						<TouchableHighlight
-							onPress={()=> this.refreshDataAndroid()}
+							onPress={()=> this.goSearch()}
 							underlayColor='#ddd'
 						>
 							<Text style={styles.textSmall}>

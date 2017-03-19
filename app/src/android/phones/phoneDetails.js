@@ -2,19 +2,16 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
-    Image,
     TouchableHighlight,
     ListView,
     ScrollView,
     ActivityIndicator,
-    TabBarIOS,
-    NavigatorIOS,
     TextInput,
-	BackAndroid
+	BackAndroid,
+	Alert
 } from 'react-native';
 
 class PhoneDetails extends Component {
@@ -26,7 +23,7 @@ class PhoneDetails extends Component {
 				this.props.navigator.pop();
 			}
 			return true;
-		});
+		});			
 		
 		this.state = {
 			name: ''
@@ -42,151 +39,195 @@ class PhoneDetails extends Component {
 				apt: props.data.apt,
 				index: props.data.index
 			};
-		}
+		}		
     }
-	
-    goBack(rowData) {
+    
+	goBack() {
 		this.props.navigator.pop();
 	}
 	
     render() {
+        var errorCtrl, validCtrl;
+
+        if (this.state.serverError) {
+            errorCtrl = <Text style={styles.error}>
+							Something went wrong.
+						</Text>;
+        }
+
+        if (this.state.invalidValue) {
+            validCtrl = <Text style={styles.error}>
+							Value required - please provide.
+						</Text>;
+        }
+
         return (
-            <ScrollView>
-					<View style={{
-							flexDirection: 'row',
-							justifyContent: 'space-between'
-						}}>
-						<View>
-							<TouchableHighlight
-								onPress={()=> this.goBack()}
-								underlayColor='#ddd'
-							>
-								<Text style={{
-									fontSize: 20,
-									textAlign: 'center',
-									margin: 10,
-									fontWeight: 'bold'
-								}}>
-									 
-								</Text>
-							</TouchableHighlight>	
-						</View>
-						<View>
-							<TouchableHighlight
-								underlayColor='#ddd'
-							>
-								<Text style={{
-									fontSize: 20,
-									textAlign: 'center',
-									margin: 10,
-									fontWeight: 'bold',
-									color: 'black'
-								}}>
-									{this.state.name}
-								</Text>
-							</TouchableHighlight>	
-						</View>						
-						<View>
-							<TouchableHighlight
-								underlayColor='#ddd'
-							>
-								<Text style={{
-									fontSize: 18,
-									textAlign: 'center',
-									margin: 20,
-									fontWeight: 'bold'
-								}}>
-									 
-								</Text>
-							</TouchableHighlight>	
-						</View>
-					</View>
-					
-					<View style={{
-						flex: 1,
-						padding: 10,
-						paddingBottom: 85,
-						justifyContent: 'flex-start',
-						backgroundColor: 'white'
-					}}>
-						<TextInput
-							style={styles.loginInput}
-							value={'Phone: ' + this.state.phone}
-							>
-						</TextInput>
-						
-						<TextInput
-							style={styles.loginInput}
-							value={'Str: ' + this.state.street}
-							>
-						</TextInput>
-
-						<TextInput
-							style={styles.loginInput}
-							value={'House: ' + this.state.house}
-							>
-						</TextInput>	
-
-						<TextInput
-							style={styles.loginInput}
-							value={'Apt: ' + this.state.apt}
-							>
-						</TextInput>	
-
-						<TextInput
-							style={styles.loginInput}
-							value={'Zip: ' + this.state.index}
-							>
-						</TextInput>
-						
+            <View style={styles.container}>
+				<View style={styles.header}>
+					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
-
-							style={styles.button}>
-							<Text style={styles.buttonText}>Back</Text>
-						</TouchableHighlight>
+							underlayColor='#ddd'
+						>
+							<Text style={styles.textSmall}>
+								Back
+							</Text>
+						</TouchableHighlight>	
 					</View>
-            </ScrollView>
-        );
+					<View>
+						<TouchableHighlight
+							underlayColor='#ddd'
+						>
+							<Text style={styles.textLarge}>
+								{this.state.name}
+							</Text>
+						</TouchableHighlight>	
+					</View>						
+					<View>
+						<TouchableHighlight
+							underlayColor='#ddd'
+						>
+							<Text style={styles.textSmall}>
+							</Text>
+						</TouchableHighlight>	
+					</View>
+				</View>
+					
+				<ScrollView>
+					<View style={styles.form}>					
+						<View style={styles.itemBlock}>
+							<Text style={styles.itemTextBold}>
+								Name:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.name}
+							</Text>		
+						</View>
+						
+						<View style={styles.itemBlock}>
+							<Text style={styles.itemTextBold}>
+								Phone:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.phone}
+							</Text>		
+						</View>
+						
+						<View style={styles.itemBlock}>
+							<Text style={styles.itemTextBold}>
+								Street:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.street}
+							</Text>
+						</View>
+						
+						<View style={styles.itemBlock}>
+							<Text style={styles.itemTextBold}>
+								House:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.house}
+							</Text>		
+						</View>
+						
+						<View style={styles.itemBlock}>
+							<Text style={styles.itemTextBold}>
+								Apt:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.apt}
+							</Text>		
+						</View>		
+						
+						<View style={styles.itemBlock}>
+							<Text style={styles.itemTextBold}>
+								Zip:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.index}
+							</Text>		
+						</View>
+						
+						<View style={styles.itemBlock}>
+							<Text style={styles.itemTextBold}>
+								ID:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.id}
+							</Text>		
+						</View>
+						
+						{validCtrl}
+
+						<TouchableHighlight
+							onPress={()=> this.goBack()}
+							style={styles.button}>
+							<Text style={styles.buttonText}>
+								Back
+							</Text>
+						</TouchableHighlight>
+						
+						<Text>{this.state.bugANDROID}</Text>
+					</View>
+				</ScrollView>
+			</View>
+        )
     }
 }
 
 const styles = StyleSheet.create({
-    headder: {
-        fontSize: 24,
-        textAlign: 'center',
-        margin: 10,
-        paddingTop: 10,
-        fontWeight: 'bold'
+	container: {
+		flex: 1, 
+		justifyContent: 'center', 
+		backgroundColor: 'white'
+	},		
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		backgroundColor: '#48BBEC',
+		borderWidth: 0,
+		borderColor: 'whitesmoke'
+	},	
+	textSmall: {
+		fontSize: 16,
+		textAlign: 'center',
+		margin: 14,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	textLarge: {
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10,
+		marginRight: 40,
+		fontWeight: 'bold',
+		color: 'white'
+	},	
+    form: {
+		flex: 1,
+		padding: 10,
+		justifyContent: 'flex-start',
+		paddingBottom: 130,
+		backgroundColor: 'white'
     },
-    details: {
-        fontSize: 20,
-        padding: 10,
-        margin: 5,
-        borderWidth: 1,
-        borderColor: 'lightgray'
-    },
-    container: {
-        backgroundColor: '#F5FCFF',
-        paddingTop: 40,
-        padding: 10,
-        alignItems: 'center',
-        flex: 1
-    },
-    logo: {
-        width: 66,
-        height: 65
-    },
-    loginInput: {
-        height: 50,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        borderRadius: 0,
-        color: 'black'
-    },
+	itemBlock: {
+		flexDirection: 'row'
+    },	
+    itemTextBold: {
+		fontSize: 20,
+		textAlign: 'left',
+		margin: 10,
+		fontWeight: 'bold',
+		color: 'black'
+    },    
+	itemText: {
+		fontSize: 20,
+		textAlign: 'left',
+		margin: 10,
+		marginLeft: 2,
+		color: 'black'
+    },		
     button: {
         height: 50,
         backgroundColor: '#48BBEC',
@@ -199,14 +240,16 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#fff',
-        fontSize: 24
+        fontSize: 20,
+		fontWeight: 'bold'
     },
     loader: {
         marginTop: 20
     },
     error: {
         color: 'red',
-        paddingTop: 10
+        paddingTop: 10,
+        textAlign: 'center'
     }
 });
 
