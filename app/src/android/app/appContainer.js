@@ -9,7 +9,6 @@ import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view
 
 import Audit from '../audit/audit';
 import AuditDetails from '../audit/auditDetails';
-import AuditAdd from '../audit/auditAdd';
 
 import Users from '../users/users';
 import UserDetails from '../users/userDetails';
@@ -35,7 +34,6 @@ class AppContainer extends Component {
 			<ScrollableTabView 
 				renderTabBar={() => <DefaultTabBar backgroundColor='white' />}
 			>
-				<SearchTab tabLabel="Search" />
 				<PhonesTab tabLabel="Phones" />
 				<UsersTab tabLabel="Users" />
 				<AuditTab tabLabel="Audit" />
@@ -74,7 +72,7 @@ class SearchTab extends Component {
 			case 1: return <SearchResults data={route.data} routes={this.routes} navigator={navigator} />
 					break;			
 			case 2: return <PhoneDetails data={route.data} routes={this.routes} navigator={navigator} />
-					break
+					break;
  		}
  	}	
 	
@@ -107,7 +105,11 @@ class PhonesTab extends Component {
 			case 0: return <Phones routes={this.routes} navigator={navigator} />
 					break;			
 			case 1: return <PhoneDetails data={route.data} routes={this.routes} navigator={navigator} />
-					break
+					break;			
+			case 2: return <Search data={route.data} routes={this.routes} navigator={navigator} />
+					break;			
+			case 3: return <SearchResults data={route.data} routes={this.routes} navigator={navigator} />
+					break;
  		}
  	}	
 	
@@ -143,7 +145,7 @@ class UsersTab extends Component {
 			case 1: return <UserDetails data={route.data} routes={this.routes} navigator={navigator} />
 					break;
 			case 2: return <UserAdd data={route.data} routes={this.routes} navigator={navigator} />
-					break
+					break;
  		}
  	}	
 	
@@ -177,9 +179,7 @@ class AuditTab extends Component {
 			case 0: return <Audit routes={this.routes} navigator={navigator} />
 					break;			
 			case 1: return <AuditDetails data={route.data} routes={this.routes} navigator={navigator} />
-					break			
-			case 2: return <AuditAdd data={route.data} routes={this.routes} navigator={navigator} />
-					break
+					break;
  		}
  	}	
 	

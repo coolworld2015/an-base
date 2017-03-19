@@ -96,9 +96,7 @@ class AuditDetails extends Component {
 					
 				<ScrollView>
 					<View style={styles.form}>					
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								User:
 							</Text>									
@@ -107,9 +105,7 @@ class AuditDetails extends Component {
 							</Text>		
 						</View>
 						
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								Date:
 							</Text>									
@@ -118,9 +114,7 @@ class AuditDetails extends Component {
 							</Text>		
 						</View>
 						
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								IP:
 							</Text>									
@@ -129,9 +123,7 @@ class AuditDetails extends Component {
 							</Text>		
 						</View>		
 						
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								ID:
 							</Text>									
@@ -140,9 +132,7 @@ class AuditDetails extends Component {
 							</Text>		
 						</View>
 						
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								Description:
 							</Text>									
@@ -203,7 +193,10 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-start',
 		paddingBottom: 130,
 		backgroundColor: 'white'
-    },    
+    },
+	itemBlock: {
+		flexDirection: 'row'
+    },	
     itemTextBold: {
 		fontSize: 20,
 		textAlign: 'left',

@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-start',
 		paddingBottom: 130,
 		backgroundColor: 'white'
-    },    
+    },
 	formInput: {
         height: 50,
         marginTop: 10,
