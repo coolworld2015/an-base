@@ -1,0 +1,3 @@
+rootProject.name = 'anbase'
+
+include ':app'
