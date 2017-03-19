@@ -1,3 +1,5 @@
+'use strict';
+
 import React, {Component} from 'react';
 import {
     AppRegistry,
@@ -34,7 +36,7 @@ class Users extends Component {
     }
 	
 	componentDidMount() {
-		this.getUsers();
+		this.getItems();
 	}
 	
     componentWillUpdate() {
@@ -46,11 +48,11 @@ class Users extends Component {
 				resultsCount: 0
             });
 
-            this.getUsers();
+            this.getItems();
         }
     }
 
-    getUsers() {
+    getItems() {
         fetch(appConfig.url + 'api/users/get', {			
             method: 'get',
             headers: {
@@ -99,7 +101,7 @@ class Users extends Component {
 		});
     }
 	
-    addUser() {
+    addItem() {
 		this.props.navigator.push({
 			index: 2
 		});
@@ -259,7 +261,7 @@ class Users extends Component {
 					</View>						
 					<View>
 						<TouchableHighlight
-							onPress={()=> this.addUser()}
+							onPress={()=> this.addItem()}
 							underlayColor='#ddd'
 						>
 							<Text style={{

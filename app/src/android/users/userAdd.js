@@ -1,3 +1,5 @@
+'use strict';
+
 import React, {Component} from 'react';
 import {
     AppRegistry,
@@ -32,7 +34,7 @@ class UserAdd extends Component {
         }
     }
 
-    addUser() {
+    addItem() {
         if (this.state.name == undefined ||
             this.state.pass == undefined ||
             this.state.description == undefined) {
@@ -121,7 +123,7 @@ class UserAdd extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								{appConfig.language.back}
+								Back
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -137,7 +139,7 @@ class UserAdd extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								{appConfig.language.newrec}
+								New record
 							</Text>
 						</TouchableHighlight>	
 					</View>						
@@ -173,7 +175,7 @@ class UserAdd extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.name}
-							placeholder={appConfig.language.login}>
+							placeholder='Login'>
 						</TextInput>
 
 						<TextInput
@@ -184,7 +186,7 @@ class UserAdd extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.pass}
-							placeholder={appConfig.language.pass}>
+							placeholder='Password'>
 						</TextInput>
 
 						<TextInput
@@ -196,15 +198,15 @@ class UserAdd extends Component {
 							})}
 							style={styles.loginInput1}
 							value={this.state.description}
-							placeholder={appConfig.language.description}>
+							placeholder='Description'>
 						</TextInput>
 
 						{validCtrl}
 
 						<TouchableHighlight
-							onPress={()=> this.addUser()}
+							onPress={()=> this.addItem()}
 							style={styles.button}>
-							<Text style={styles.buttonText}>{appConfig.language.add}</Text>
+							<Text style={styles.buttonText}>Add</Text>
 						</TouchableHighlight>
 
 						{errorCtrl}

@@ -1,7 +1,6 @@
-//'use strict';
+'use strict';
 
 import React, {Component} from 'react';
-
 import {
 	AppRegistry,
 	StyleSheet,
@@ -12,7 +11,7 @@ import {
 	TouchableOpacity
 } from 'react-native';
 
-import ScrollableTabView from 'react-native-scrollable-tab-view';
+import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
 
 import Audit from '../audit/audit';
 import AuditDetails from '../audit/auditDetails';
@@ -39,7 +38,9 @@ class AppContainer extends Component {
 	
 	render() {
 		return (
-			<ScrollableTabView>
+			<ScrollableTabView 
+				renderTabBar={() => <DefaultTabBar backgroundColor='white' />}
+			>
 				<SearchTab tabLabel="Search" />
 				<PhonesTab tabLabel="Phones" />
 				<UsersTab tabLabel="Users" />

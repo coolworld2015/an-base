@@ -1,3 +1,5 @@
+'use strict';
+
 import React, {Component} from 'react';
 import {
     AppRegistry,
@@ -42,7 +44,7 @@ class UserDetails extends Component {
 		}		
     }
 
-    updateUser() {
+    updateItem() {
         if (this.state.name == '' ||
             this.state.pass == '' ||
             this.state.description == '') {
@@ -96,8 +98,8 @@ class UserDetails extends Component {
 
     deleteItemDialog() {
 		Alert.alert(
-			appConfig.language.delrec,
-			appConfig.language.conform + this.state.name + '?',
+			'Delete record',
+			'Are you sure you want to delete ' + this.state.name + '?',
 			[
 				{text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
 				{
@@ -194,7 +196,7 @@ class UserDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								{appConfig.language.back}
+								Back
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -225,7 +227,7 @@ class UserDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								{appConfig.language.delete}
+								Delete
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -247,7 +249,7 @@ class UserDetails extends Component {
 							})}
 							style={styles.loginInputBold}
 							value={this.state.name}
-							placeholder={appConfig.language.login}>
+							placeholder='Login'>
 						</TextInput>
 
 						<TextInput
@@ -258,7 +260,7 @@ class UserDetails extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.pass}
-							placeholder={appConfig.language.pass}>
+							placeholder='Password'>
 						</TextInput>
 
 						<TextInput
@@ -270,16 +272,15 @@ class UserDetails extends Component {
 							})}
 							style={styles.loginInput1}
 							value={this.state.description}
-							placeholder={appConfig.language.description}>
+							placeholder='Description'>
 						</TextInput>
 
 						{validCtrl}
 
 						<TouchableHighlight
-							onPress={()=> this.updateUser()}
-
+							onPress={()=> this.updateItem()}
 							style={styles.button}>
-							<Text style={styles.buttonText}>{appConfig.language.submit}</Text>
+							<Text style={styles.buttonText}>Submit</Text>
 						</TouchableHighlight>
 						
 						{errorCtrl}
@@ -370,7 +371,7 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold'
     },
     loader: {
-        marginTop: 40
+        marginTop: 20
     },
     error: {
         color: 'red',
