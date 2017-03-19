@@ -2,12 +2,7 @@
 
 import React, {Component} from 'react';
 import {
-	AppRegistry,
-	StyleSheet,
-	Text,
-	View,
-	Navigator,
-	TouchableHighlight
+	Navigator
 } from 'react-native';
 
 import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
@@ -86,14 +81,14 @@ class SearchTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
@@ -119,14 +114,14 @@ class PhonesTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
@@ -155,14 +150,14 @@ class UsersTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
@@ -191,31 +186,16 @@ class AuditTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}			
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}			
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    color: 'white',
-  },
-});
-
-module.exports = AppContainer;
+export default AppContainer;

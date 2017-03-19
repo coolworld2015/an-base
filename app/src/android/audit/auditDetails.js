@@ -1,18 +1,17 @@
+'use strict';
+
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
-    Image,
     TouchableHighlight,
     ListView,
     ScrollView,
     ActivityIndicator,
-    TabBarIOS,
-    NavigatorIOS,
     TextInput,
-	BackAndroid
+	BackAndroid,
+	Alert
 } from 'react-native';
 
 class AuditDetails extends Component {
@@ -24,7 +23,7 @@ class AuditDetails extends Component {
 				this.props.navigator.pop();
 			}
 			return true;
-		});
+		});			
 		
 		this.state = {
 			name: ''
@@ -41,36 +40,38 @@ class AuditDetails extends Component {
 				description: props.data.description,
 				showProgress: false
 			};
-		}
+		}		
     }
-	
-    goBack(rowData) {
+    
+	goBack() {
 		this.props.navigator.pop();
 	}
 	
     render() {
+        var errorCtrl, validCtrl;
+
+        if (this.state.serverError) {
+            errorCtrl = <Text style={styles.error}>
+							Something went wrong.
+						</Text>;
+        }
+
+        if (this.state.invalidValue) {
+            validCtrl = <Text style={styles.error}>
+							Value required - please provide.
+						</Text>;
+        }
+
         return (
-            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
-				<View style={{
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-					backgroundColor: '#48BBEC',
-					borderWidth: 0,
-					borderColor: 'whitesmoke'
-				}}>
+            <View style={styles.container}>
+				<View style={styles.header}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'white'
-							}}>
-								{appConfig.language.back} 
+							<Text style={styles.textSmall}>
+								Back
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -78,14 +79,7 @@ class AuditDetails extends Component {
 						<TouchableHighlight
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 20,
-								textAlign: 'center',
-								margin: 10,
-								marginRight: 20,
-								fontWeight: 'bold',
-								color: 'white'
-							}}>
+							<Text style={styles.textLarge}>
 								{this.state.date}
 							</Text>
 						</TouchableHighlight>	
@@ -94,31 +88,19 @@ class AuditDetails extends Component {
 						<TouchableHighlight
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold'
-							}}>
-								 
+							<Text style={styles.textSmall}>
 							</Text>
 						</TouchableHighlight>	
 					</View>
 				</View>
-				
-				<ScrollView>	
-					<View style={{
-						flex: 1,
-						padding: 10,
-						paddingBottom: 115,
-						justifyContent: 'flex-start',
-						backgroundColor: 'white'
-					}}>
+					
+				<ScrollView>
+					<View style={styles.form}>					
 						<View style={{
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								{appConfig.language.user}:
+								User:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.name}
@@ -129,7 +111,7 @@ class AuditDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								{appConfig.language.date}:
+								Date:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.date}
@@ -162,27 +144,66 @@ class AuditDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								{appConfig.language.description}:
+								Description:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.description}
 							</Text>		
 						</View>
+						
+						{validCtrl}
 
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
-
 							style={styles.button}>
-							<Text style={styles.buttonText}>{appConfig.language.back}</Text>
+							<Text style={styles.buttonText}>
+								Back
+							</Text>
 						</TouchableHighlight>
+						
+						<Text>{this.state.bugANDROID}</Text>
 					</View>
 				</ScrollView>
 			</View>
-        );
+        )
     }
 }
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1, 
+		justifyContent: 'center', 
+		backgroundColor: 'white'
+	},		
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		backgroundColor: '#48BBEC',
+		borderWidth: 0,
+		borderColor: 'whitesmoke'
+	},	
+	textSmall: {
+		fontSize: 16,
+		textAlign: 'center',
+		margin: 14,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	textLarge: {
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10,
+		marginRight: 40,
+		fontWeight: 'bold',
+		color: 'white'
+	},	
+    form: {
+		flex: 1,
+		padding: 10,
+		justifyContent: 'flex-start',
+		paddingBottom: 130,
+		backgroundColor: 'white'
+    },    
     itemTextBold: {
 		fontSize: 20,
 		textAlign: 'left',
@@ -196,45 +217,7 @@ const styles = StyleSheet.create({
 		margin: 10,
 		marginLeft: 2,
 		color: 'black'
-    },
-    countHeader: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 15,
-        backgroundColor: '#F5FCFF',
-    },
-    countFooter: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 10,
-        borderColor: '#D7D7D7',
-        backgroundColor: 'whitesmoke'
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 20,
-    },
-    loginInput: {
-        height: 50,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        borderRadius: 5,
-        color: 'black'
-    },
-    loginInput1: {
-        height: 100,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        borderRadius: 5,
-        color: 'black'
-    },
+    },		
     button: {
         height: 50,
         backgroundColor: '#48BBEC',
@@ -257,12 +240,6 @@ const styles = StyleSheet.create({
         color: 'red',
         paddingTop: 10,
         textAlign: 'center'
-    },
-    img: {
-        height: 95,
-        width: 75,
-        borderRadius: 20,
-        margin: 20
     }
 });
 
