@@ -2,17 +2,13 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
-    Image,
     TouchableHighlight,
     ListView,
     ScrollView,
     ActivityIndicator,
-    TabBarIOS,
-    NavigatorIOS,
     TextInput,
 	BackAndroid,
 	Alert
@@ -130,7 +126,6 @@ class UserDetails extends Component {
         })
 			.then((response)=> response.json())
             .then((responseData)=> {
-				console.log(responseData);
 				if (responseData.text) {
 					appConfig.users.refresh = true;
 					this.props.navigator.pop();
@@ -141,7 +136,6 @@ class UserDetails extends Component {
 				}
             })
             .catch((error)=> {
-                console.log(error);
                 this.setState({
                     serverError: true
                 });
@@ -159,43 +153,29 @@ class UserDetails extends Component {
 	}
 	
     render() {
-        var errorCtrl = <View />;
+        var errorCtrl, validCtrl;
 
         if (this.state.serverError) {
             errorCtrl = <Text style={styles.error}>
-                Something went wrong.
-            </Text>;
+							Something went wrong.
+						</Text>;
         }
-
-        var validCtrl = <View />;
 
         if (this.state.invalidValue) {
             validCtrl = <Text style={styles.error}>
-                Value required - please provide.
-            </Text>;
+							Value required - please provide.
+						</Text>;
         }
 
         return (
-            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
-				<View style={{
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-					backgroundColor: '#48BBEC',
-					borderWidth: 0,
-					borderColor: 'whitesmoke'
-				}}>
+            <View style={styles.container}>
+				<View style={styles.header}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'white'
-							}}>
+							<Text style={styles.textSmall}>
 								Back
 							</Text>
 						</TouchableHighlight>	
@@ -204,13 +184,7 @@ class UserDetails extends Component {
 						<TouchableHighlight
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 20,
-								textAlign: 'center',
-								margin: 10,
-								fontWeight: 'bold',
-								color: 'white'
-							}}>
+							<Text style={styles.textLarge}>
 								{this.state.name}
 							</Text>
 						</TouchableHighlight>	
@@ -220,13 +194,7 @@ class UserDetails extends Component {
 							onPress={()=> this.deleteItemDialog()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'white'
-							}}>
+							<Text style={styles.textSmall}>
 								Delete
 							</Text>
 						</TouchableHighlight>	
@@ -234,20 +202,14 @@ class UserDetails extends Component {
 				</View>
 					
 				<ScrollView>
-					<View style={{
-						flex: 1,
-						padding: 10,
-						paddingBottom: 70,
-						justifyContent: 'flex-start',
-						backgroundColor: 'white'
-					}}>						
+					<View style={styles.form}>					
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								name: text,
 								invalidValue: false
 							})}
-							style={styles.loginInputBold}
+							style={styles.formInput}
 							value={this.state.name}
 							placeholder='Login'>
 						</TextInput>
@@ -258,7 +220,7 @@ class UserDetails extends Component {
 								pass: text,
 								invalidValue: false
 							})}
-							style={styles.loginInput}
+							style={styles.formInput}
 							value={this.state.pass}
 							placeholder='Password'>
 						</TextInput>
@@ -270,7 +232,7 @@ class UserDetails extends Component {
 								description: text,
 								invalidValue: false
 							})}
-							style={styles.loginInput1}
+							style={styles.formInputArea}
 							value={this.state.description}
 							placeholder='Description'>
 						</TextInput>
@@ -280,7 +242,9 @@ class UserDetails extends Component {
 						<TouchableHighlight
 							onPress={()=> this.updateItem()}
 							style={styles.button}>
-							<Text style={styles.buttonText}>Submit</Text>
+							<Text style={styles.buttonText}>
+								Submit
+							</Text>
 						</TouchableHighlight>
 						
 						{errorCtrl}
@@ -295,36 +259,46 @@ class UserDetails extends Component {
 					</View>
 				</ScrollView>
 			</View>
-        );
+        )
     }
 }
 
 const styles = StyleSheet.create({
-    AppContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'gray',
-    },
-    countHeader: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 15,
-        backgroundColor: '#F5FCFF',
-    },
-    countFooter: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 10,
-        borderColor: '#D7D7D7',
-        backgroundColor: 'whitesmoke'
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 20,
-    },
-    loginInput: {
+	container: {
+		flex: 1, 
+		justifyContent: 'center', 
+		backgroundColor: 'white'
+	},		
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		backgroundColor: '#48BBEC',
+		borderWidth: 0,
+		borderColor: 'whitesmoke'
+	},	
+	textSmall: {
+		fontSize: 16,
+		textAlign: 'center',
+		margin: 14,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	textLarge: {
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10,
+		marginRight: 40,
+		fontWeight: 'bold',
+		color: 'white'
+	},	
+    form: {
+		flex: 1,
+		padding: 10,
+		justifyContent: 'flex-start',
+		paddingBottom: 130,
+		backgroundColor: 'white'
+    },    
+	formInput: {
         height: 50,
         marginTop: 10,
         padding: 4,
@@ -334,18 +308,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         color: 'black'
     },
-	loginInputBold: {
-        height: 50,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        borderRadius: 5,
-        color: 'black',
-		fontWeight: 'bold'
-    },		
-	loginInput1: {
+	formInputArea: {
         height: 100,
         marginTop: 10,
         padding: 4,
@@ -377,12 +340,6 @@ const styles = StyleSheet.create({
         color: 'red',
         paddingTop: 10,
         textAlign: 'center'
-    },
-    img: {
-        height: 95,
-        width: 75,
-        borderRadius: 20,
-        margin: 20
     }
 });
 
