@@ -2,17 +2,11 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
-    Image,
     TouchableHighlight,
-    ListView,
     ScrollView,
-    ActivityIndicator,
-    TabBarIOS,
-    NavigatorIOS,
     TextInput,
     Switch,
 	Dimensions
@@ -79,43 +73,23 @@ class Search extends Component {
 	}
 	
     render() {
-        var errorCtrl = <View />;
-
-        if (this.state.serverError) {
-            errorCtrl = <Text style={styles.error}>
-                Something went wrong.
-            </Text>;
-        }
-
-        var validCtrl = <View />;
+        var validCtrl;
 
         if (this.state.invalidValue) {
             validCtrl = <Text style={styles.error}>
-                Value required - please provide.
-            </Text>;
+							Value required - please provide.
+						</Text>;
         }
 
         return (
-			<View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
-				<View style={{
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-					backgroundColor: '#48BBEC',
-					borderWidth: 0,
-					borderColor: 'whitesmoke'
-				}}>
+            <View style={styles.container}>
+				<View style={styles.header}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'white'
-							}}>
+							<Text style={styles.textSmall}>
 								Back
 							</Text>
 						</TouchableHighlight>	
@@ -124,13 +98,7 @@ class Search extends Component {
 						<TouchableHighlight
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 20,
-								textAlign: 'center',
-								margin: 10,
-								fontWeight: 'bold',
-								color: 'white'
-							}}>
+							<Text style={styles.textLarge}>
 								Search 
 							</Text>
 						</TouchableHighlight>	
@@ -140,13 +108,7 @@ class Search extends Component {
 							onPress={()=> this.clearSearch()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'white'
-							}}>
+							<Text style={styles.textSmall}>
 								Clear 
 							</Text>
 						</TouchableHighlight>	
@@ -154,39 +116,15 @@ class Search extends Component {
 				</View>
 				
 				<ScrollView>
-					<View style={{
-						flex: 1,
-						padding: 10,
-						paddingBottom: 40,
-						justifyContent: 'center',
-						backgroundColor: 'white'
-					}}>	
-                        <View style={{
-							height: 50,
-							borderWidth: 1,
-							borderColor: '#48BBEC',
-							flex: 1,
-							flexDirection: 'row',
-							justifyContent: 'space-between',
-							borderRadius: 5
-						}}>
-							<View style={{
-									fontSize: 18,
-									marginTop: 10,
-									margin: 10,
-								}}>
-								<Text style={{
-									fontSize: 18
-								}}>
+					<View style={styles.scrollBlock}>	
+                        <View style={styles.switchBlock}>
+							<View>
+								<Text style={styles.switchItem}>
 									{this.state.textSwitchBase}
 								</Text>
 							</View>
 
-							<View style={{
-									fontSize: 18,
-									marginTop: 10,
-									margin: 10,
-								}}>
+							<View style={styles.switchItem}>
 								<Switch
 									onValueChange={(value) => {
 										this.toggleTypeChange();
@@ -199,18 +137,7 @@ class Search extends Component {
 							</View>
 						</View>                        
 						
-						<View style={{
-							height: 50,
-							marginTop: 10,
-							borderWidth: 1,
-							borderColor: '#48BBEC',
-							flex: 1,
-							flexDirection: 'row',
-							justifyContent: 'space-between',
-							borderRadius: 5,
-							paddingTop: 2,
-							paddingLeft: 6
-						}}>
+						<View style={styles.inputBlock}>
 							<TextInput
 								underlineColorAndroid='rgba(0,0,0,0)'
 								onChangeText={(text)=> this.setState({
@@ -221,12 +148,7 @@ class Search extends Component {
 								style={{ 
 									height: 50,
 									width: this.state.width * .94,
-									//margin: 10,
-									//padding: 10,
 									fontSize: 18,
-									//borderWidth: 1,
-									//borderColor: '#48BBEC',
-									//borderRadius: 5,
 									color: 'black'
 								}} 
 								placeholder="Search here">
@@ -241,8 +163,7 @@ class Search extends Component {
 							<Text style={styles.buttonText}>
 								Submit
 							</Text>
-						</TouchableHighlight>
-						
+						</TouchableHighlight>				
                     </View>
 				</ScrollView>
 			</View>
@@ -251,63 +172,66 @@ class Search extends Component {
 }
 
 const styles = StyleSheet.create({
-    AppContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-    },
-    countHeader: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 15,
-        backgroundColor: '#F5FCFF',
-    },
-    countFooter: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 10,
-        borderColor: '#D7D7D7',
-        backgroundColor: 'whitesmoke'
-    },
-    countHeader1: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 15,
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 20,
-    },
-    container: {
+	container: {
+		flex: 1, 
+		justifyContent: 'center', 
+		backgroundColor: 'white'
+	},		
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		backgroundColor: '#48BBEC',
+		borderWidth: 0,
+		borderColor: 'whitesmoke'
+	},	
+	textSmall: {
+		fontSize: 16,
+		textAlign: 'center',
+		margin: 14,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	textLarge: {
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10,
+		marginRight: 20,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	scrollBlock: {
+		flex: 1,
 		padding: 10,
-        paddingBottom: 210,
-        alignItems: 'center',
-        flex: 1,
-		backgroundColor: 'white',
-    },
-    logo: {
-        width: 66,
-        height: 65
-    },
-    heading: {
-        fontSize: 30,
-        margin: 10,
-        marginBottom: 20
-    },
-    loginInput: {
-        height: 50,
-		width: 360,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: '#48BBEC',
-        borderRadius: 0,
-        color: 'black'
-    },
+		paddingBottom: 40,
+		justifyContent: 'center',
+		backgroundColor: 'white'
+	},		
+	switchBlock: {
+		height: 50,
+		borderWidth: 1,
+		borderColor: '#48BBEC',
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		borderRadius: 5
+	},
+	switchItem: {
+		fontSize: 18,
+		marginTop: 10,
+		margin: 10
+	},		
+	inputBlock: {
+		height: 50,
+		marginTop: 10,
+		borderWidth: 1,
+		borderColor: '#48BBEC',
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		borderRadius: 5,
+		paddingTop: 2,
+		paddingLeft: 6
+	},		
     button: {
         height: 50,
         backgroundColor: '#48BBEC',
@@ -324,7 +248,8 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold'
     },
     loader: {
-        marginTop: 40
+		justifyContent: 'center',
+		height: 100
     },
     error: {
         color: 'red',
