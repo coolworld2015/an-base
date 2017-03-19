@@ -45,7 +45,8 @@ class Search extends Component {
     }
 
     onSearchPressed() {
-        if (this.state.searchQuery == undefined) {
+        if (this.state.searchQuery == undefined ||
+			this.state.searchQuery == '') {
             this.setState({
                 invalidValue: true
             });
@@ -53,7 +54,7 @@ class Search extends Component {
         }
 		 
 		this.props.navigator.push({
-			index: 1,
+			index: 3,
 			data: {
 				searchQuery: this.state.searchQuery,
 				searchType: this.state.textSwitchBase
@@ -73,6 +74,10 @@ class Search extends Component {
         }
     }
 	
+	goBack() {
+		this.props.navigator.pop();
+	}
+	
     render() {
         var errorCtrl = <View />;
 
@@ -91,92 +96,156 @@ class Search extends Component {
         }
 
         return (
-            <ScrollView>
-                <View style={styles.container}>
-                    <TouchableHighlight
-                        onPress={this.clearSearch.bind(this)}
-                        style={styles.button}>
-                        <Text style={styles.buttonText}>Search phones</Text>
-                    </TouchableHighlight>
-
-                    <View style={{
-                        height: 50,
-                        marginTop: 10,
-                        padding: 10,
-                        borderWidth: 1,
-                        borderColor: '#48BBEC',
-                        alignSelf: 'stretch',
-                        flex: 1,
-                        flexDirection: 'row'
-                    }}>
-                        <View
-                            style={{
-                                marginTop: 3,
-                                flex: 1
-                            }}>
-                            <Text style={{
-                                fontSize: 18,
-                            }}>
-                                {this.state.textSwitchBase}
-                            </Text>
-                        </View>
-
-                        <View
-                            style={{
-                                marginTop: -1
-                            }}>
-                            <Switch
-                                onValueChange={(value) => {
-                                    this.toggleTypeChange();
-                                    this.setState({
-                                        eventSwitchBase: value
-                                    });
-                                }}
-                                value={this.state.eventSwitchBase}
-                            />
-                        </View>
-                    </View>
-
-                    <TextInput
-                        onChangeText={(text)=> this.setState({
-                            searchQuery: text,
-                            invalidValue: false
-                        })}
-                        value={this.state.searchQuery}
-                        style={{ 
+			<View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
+				<View style={{
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					backgroundColor: '#48BBEC',
+					borderWidth: 0,
+					borderColor: 'whitesmoke'
+				}}>
+					<View>
+						<TouchableHighlight
+							onPress={()=> this.goBack()}
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 16,
+								textAlign: 'center',
+								margin: 14,
+								fontWeight: 'bold',
+								color: 'white'
+							}}>
+								Back
+							</Text>
+						</TouchableHighlight>	
+					</View>
+					<View>
+						<TouchableHighlight
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 20,
+								textAlign: 'center',
+								margin: 10,
+								fontWeight: 'bold',
+								color: 'white'
+							}}>
+								Search 
+							</Text>
+						</TouchableHighlight>	
+					</View>						
+					<View>
+						<TouchableHighlight
+							onPress={()=> this.clearSearch()}
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 16,
+								textAlign: 'center',
+								margin: 14,
+								fontWeight: 'bold',
+								color: 'white'
+							}}>
+								Clear 
+							</Text>
+						</TouchableHighlight>	
+					</View>
+				</View>
+				
+				<ScrollView>
+					<View style={{
+						flex: 1,
+						padding: 10,
+						paddingBottom: 40,
+						justifyContent: 'center',
+						backgroundColor: 'white'
+					}}>	
+                        <View style={{
 							height: 50,
-							width: this.state.width * .94,
-							marginTop: 10,
-							padding: 4,
-							fontSize: 18,
-							borderWidth: 3,
+							borderWidth: 1,
 							borderColor: '#48BBEC',
-							borderRadius: 0,
-							color: 'black'
-						}} 
-                        placeholder="Search phones">
-                    </TextInput>
+							flex: 1,
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							borderRadius: 5
+						}}>
+							<View style={{
+									fontSize: 18,
+									marginTop: 10,
+									margin: 10,
+								}}>
+								<Text style={{
+									fontSize: 18
+								}}>
+									{this.state.textSwitchBase}
+								</Text>
+							</View>
 
-                    {validCtrl}
-
-                    <TouchableHighlight
-                        onPress={this.onSearchPressed.bind(this)}
-                        style={styles.button}>
-                        <Text style={styles.buttonText}>Search</Text>
-                    </TouchableHighlight>
-
-                    {errorCtrl}
-
-                    <ActivityIndicator
-                        animating={this.state.showProgress}
-                        size="large"
-                        style={styles.loader}
-                    />
-					
-					<Text>{this.state.bugANDROID}</Text>
-                </View>
-            </ScrollView>
-        )
+							<View style={{
+									fontSize: 18,
+									marginTop: 10,
+									margin: 10,
+								}}>
+								<Switch
+									onValueChange={(value) => {
+										this.toggleTypeChange();
+										this.setState({
+											eventSwitchBase: value
+										});
+									}}
+									value={this.state.eventSwitchBase}
+								/>
+							</View>
+						</View>                        
+						
+						<View style={{
+							height: 50,
+							marginTop: 10,
+							borderWidth: 1,
+							borderColor: '#48BBEC',
+							flex: 1,
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							borderRadius: 5,
+							paddingTop: 1
+						}}>
+							<TextInput
+								underlineColorAndroid='rgba(0,0,0,0)'
+								onChangeText={(text)=> this.setState({
+									searchQuery: text,
+									invalidValue: false
+								})}
+								value={this.state.searchQuery}
+								style={{ 
+									height: 50,
+									width: this.state.width * .94,
+									//margin: 10,
+									//padding: 10,
+									fontSize: 18,
+									//borderWidth: 1,
+									//borderColor: '#48BBEC',
+									//borderRadius: 5,
+									color: 'black'
+								}} 
+								placeholder="Search phones">
+							</TextInput>
+						</View>
+						
+						{validCtrl}
+						
+						<TouchableHighlight
+							onPress={()=> this.onSearchPressed()}
+							style={styles.button}>
+							<Text style={styles.buttonText}>
+								Submit
+							</Text>
+						</TouchableHighlight>
+						
+                    </View>
+				</ScrollView>
+			</View>
+		)
     }
 }
 
@@ -250,14 +319,15 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#fff',
-        fontSize: 24
+        fontSize: 20,
+		fontWeight: 'bold'
     },
     loader: {
         marginTop: 40
     },
     error: {
         color: 'red',
-        paddingTop: 10,
+        padding: 10,
         textAlign: 'center'
     }
 });

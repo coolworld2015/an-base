@@ -104,7 +104,7 @@ class SearchResults extends Component {
 
     showDetails(rowData) {
 		this.props.navigator.push({
-			index: 2,
+			index: 1,
 			data: rowData
 		});
     }
