@@ -115,17 +115,9 @@ class SearchResults extends Component {
                 onPress={()=> this.showDetails(rowData)}
                 underlayColor='#ddd'
             >
-                <View style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    padding: 20,
-                    alignItems: 'center',
-                    borderColor: '#D7D7D7',
-                    borderBottomWidth: 1,
-                    backgroundColor: '#fff'
-                }}>
-                    <Text style={{backgroundColor: '#fff', color: 'black'}}>
-                        {rowData.name} - {rowData.phone}
+				<View style={styles.row}>
+                    <Text style={styles.rowText}>
+						{rowData.name} - {rowData.phone}
                     </Text>
                 </View>
             </TouchableHighlight>
@@ -155,26 +147,23 @@ class SearchResults extends Component {
             return;
         }
 
-        var items, positionY, recordsCount;
-        recordsCount = this.state.recordsCount;
-        positionY = this.state.positionY;
-        items = this.state.filteredItems.slice(0, recordsCount);
-
-        console.log(positionY + ' - ' + recordsCount + ' - ' + items.length);
-
+        var recordsCount = this.state.recordsCount;
+        var positionY = this.state.positionY;
+        var items = this.state.filteredItems.slice(0, recordsCount);
+        
         if (event.nativeEvent.contentOffset.y >= positionY - 10) {
             console.log(items.length);
             this.setState({
                 dataSource: this.state.dataSource.cloneWithRows(items),
-                recordsCount: recordsCount + 20,
-                positionY: positionY + 1000
+                recordsCount: recordsCount + 10,
+                positionY: positionY + 500
             });
         }
     }
 
     onChangeText(text) {
         if (this.state.dataSource == undefined) {
-            //return;
+            return;
         }
 
         var arr = [].concat(this.state.responseData);
@@ -212,24 +201,15 @@ class SearchResults extends Component {
         }
 
         return (
-            <View style={{flex: 1, justifyContent: 'center'}}>
-				<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between'
-					}}>
+            <View style={styles.container}>
+				<View style={styles.header}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'darkblue'
-							}}>
-								 Back
+							<Text style={styles.textSmall}>
+								Back
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -237,69 +217,46 @@ class SearchResults extends Component {
 						<TouchableHighlight
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 20,
-								textAlign: 'center',
-								margin: 10,
-								fontWeight: 'bold',
-								color: 'black'
-							}}>
+							<Text style={styles.textLarge}>
 								{this.state.searchQueryHttp}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
 					<View>
 						<TouchableHighlight
-							onPress={()=> this.goBack()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'darkblue'
-							}}>
-								Done 
+							<Text style={styles.textSmall}>
 							</Text>
 						</TouchableHighlight>	
 					</View>
 				</View>
-
-				<View style={{marginTop: 0}}>
-					<TextInput style={{
-						height: 45,
-						marginTop: 4,
-						padding: 5,
-						backgroundColor: 'whitesmoke',
-						borderWidth: 3,
-						borderColor: 'whitesmoke',
-						borderRadius: 0,
-					}}
-							   onChangeText={this.onChangeText.bind(this)}
-							   value={this.state.searchQuery}
-							   placeholder="Search">
-					</TextInput>
-
-					{errorCtrl}
-
+				
+                <View>
+                    <TextInput
+						underlineColorAndroid='rgba(0,0,0,0)'
+						onChangeText={this.onChangeText.bind(this)}
+						style={styles.textInput}
+						value={this.state.searchQuery}
+						placeholder="Search here">
+                    </TextInput>    			
 				</View>
+				
+				{errorCtrl}
 
-				{loader}
-
-				<ScrollView
-					onScroll={this.refreshData.bind(this)} scrollEventThrottle={16}>
+                {loader}	
+				
+				<ScrollView onScroll={this.refreshData.bind(this)} scrollEventThrottle={16}>
 					<ListView
 						enableEmptySections={true}
-						style={{marginTop: 0, marginBottom: 0}}
 						dataSource={this.state.dataSource}
 						renderRow={this.renderRow.bind(this)}
 					/>
 				</ScrollView>
-
-				<View style={{marginBottom: 0}}>
+				
+				<View>
 					<Text style={styles.countFooter}>
-						{this.state.resultsCount} entries were found.
+						Records: {this.state.resultsCount} 
 					</Text>
 				</View>
             </View>
@@ -308,79 +265,68 @@ class SearchResults extends Component {
 }
 
 const styles = StyleSheet.create({
-    AppContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    countHeader: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 15,
-        backgroundColor: '#F5FCFF',
-    },
+	container: {
+		flex: 1, 
+		justifyContent: 'center', 
+		backgroundColor: 'white'
+	},		
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		backgroundColor: '#48BBEC',
+		borderWidth: 0,
+		borderColor: 'whitesmoke'
+	},	
+	textSmall: {
+		fontSize: 16,
+		textAlign: 'center',
+		margin: 14,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	textLarge: {
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10,
+		marginRight: 60,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	textInput: {
+		height: 45,
+		marginTop: 0,
+		padding: 5,
+		backgroundColor: 'white',
+		borderWidth: 3,
+		borderColor: 'lightgray',
+		borderRadius: 0
+	},		
+	row: {
+		flex: 1,
+		flexDirection: 'row',
+		padding: 20,
+		alignItems: 'center',
+		borderColor: '#D7D7D7',
+		borderBottomWidth: 1,
+		backgroundColor: '#fff'
+	},		
+	rowText: {
+		backgroundColor: '#fff', 
+		color: 'black', 
+		fontWeight: 'bold'
+	},	
     countFooter: {
         fontSize: 16,
         textAlign: 'center',
         padding: 10,
         borderColor: '#D7D7D7',
-        backgroundColor: 'lightgray',
-		color: 'black'
-    },
-    countHeader1: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 15,
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 20,
-    },
-    container: {
-        backgroundColor: '#F5FCFF',
-        paddingTop: 40,
-        padding: 10,
-        alignItems: 'center',
-        flex: 1
-    },
-    logo: {
-        width: 66,
-        height: 65
-    },
-    heading: {
-        fontSize: 30,
-        margin: 10,
-        marginBottom: 20
-    },
-    loginInput: {
-        height: 50,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: '#48BBEC',
-        borderRadius: 0,
-        color: '#48BBEC'
-    },
-    button: {
-        height: 50,
         backgroundColor: '#48BBEC',
-        borderColor: '#48BBEC',
-        alignSelf: 'stretch',
-        marginTop: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 5
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 24
+		color: 'white',
+		fontWeight: 'bold'
     },
     loader: {
-        marginTop: 20
+		justifyContent: 'center',
+		height: 100
     },
     error: {
         color: 'red',
