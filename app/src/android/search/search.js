@@ -26,7 +26,7 @@ class Search extends Component {
             showProgress: false,
             eventSwitchTitle: true,
 			eventSwitchBase: true,
-            textSwitchBase: 'Search by number',
+            textSwitchBase: 'Search by phone',
 			bugANDROID: ''
         }
     }
@@ -65,7 +65,7 @@ class Search extends Component {
     toggleTypeChange() {
         if (!this.state.eventSwitchBase) {
             this.setState({
-                textSwitchBase: 'Search by number'
+                textSwitchBase: 'Search by phone'
             });
         } else {
             this.setState({
@@ -208,7 +208,8 @@ class Search extends Component {
 							flexDirection: 'row',
 							justifyContent: 'space-between',
 							borderRadius: 5,
-							paddingTop: 1
+							paddingTop: 2,
+							paddingLeft: 6
 						}}>
 							<TextInput
 								underlineColorAndroid='rgba(0,0,0,0)'
@@ -228,7 +229,7 @@ class Search extends Component {
 									//borderRadius: 5,
 									color: 'black'
 								}} 
-								placeholder="Search phones">
+								placeholder="Search here">
 							</TextInput>
 						</View>
 						
@@ -327,7 +328,7 @@ const styles = StyleSheet.create({
     },
     error: {
         color: 'red',
-        padding: 10,
+        paddingTop: 10,
         textAlign: 'center'
     }
 });

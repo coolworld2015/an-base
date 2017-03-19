@@ -55,7 +55,7 @@ class SearchResults extends Component {
 	
     findByPhone() {
 		var webUrl;
-		if (this.state.searchType == 'Search by number') {
+		if (this.state.searchType == 'Search by phone') {
 			webUrl = 'api/items/findByPhone/'
 		} else {
 			webUrl = 'api/items/findByName/'
