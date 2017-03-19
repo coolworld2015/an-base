@@ -47,33 +47,6 @@ class App extends Component {
             }	
         };		
     }
-	
-	componentWillMount() {
-		this.init();
-	}
-	
-    init() {
-        AsyncStorage.getItem('rn-budget.language')
-            .then(req => JSON.parse(req))
-            .then(json => {
-                if (json == undefined || json == null || json[0] == null) {
-					appConfig.lang = 'eng';
-					appConfig.language = appConfig.eng;
-					AsyncStorage.setItem('rn-budget.language', JSON.stringify('eng'))
-						.then(json => {})
-						.catch(error => console.log(error))
-                } else {
-					appConfig.lang = json;
-					appConfig.language = appConfig[json];
-                }
-            })
-            .catch(error => console.log(error))
-			.finally(()=> {
-                this.setState({
-					isLoading: false
-                });
-            });
-    }
 
     render() {
         if (this.state.isLoggedIn) {
