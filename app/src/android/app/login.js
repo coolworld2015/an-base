@@ -2,17 +2,13 @@
 
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
     Image,
     TouchableHighlight,
-    ListView,
     ScrollView,
     ActivityIndicator,
-    TabBarIOS,
-    NavigatorIOS,
     TextInput,
 	Dimensions
 } from 'react-native';
@@ -111,10 +107,12 @@ class Login extends Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
-                    <Image style={styles.logo}
-                           source={require('../../../logo.jpg')}
-                    />
-                    <Text style={styles.heading}>RN-Base</Text>
+					<Image style={styles.logo}
+						source={require('../../../logo.jpg')}
+					/>
+                    <Text style={styles.heading}>
+						RN-Base
+					</Text>
                     <TextInput
 						underlineColorAndroid='rgba(0,0,0,0)'
                         onChangeText={(text)=> this.setState({
@@ -184,19 +182,7 @@ class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-    AppContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 20,
-    },
     container: {
-        //backgroundColor: '#F5FCFF',
         paddingTop: 40,
         padding: 10,
         alignItems: 'center',
@@ -213,33 +199,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
 		color: 'black',
         fontWeight: 'bold'
-    },
-	footer: {
-        fontSize: 30,
-        marginTop: 10,
-        //marginBottom: 20
-    },
-    loginInput1: {
-        height: 50,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: '#48BBEC',
-        borderRadius: 0,
-        color: '#48BBEC'
-    },
-    loginInput: {
-        height: 50,
-		//width: this.state.width,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        borderRadius: 0,
-        color: 'black',
-		backgroundColor: 'white'
     },
     button: {
         height: 50,

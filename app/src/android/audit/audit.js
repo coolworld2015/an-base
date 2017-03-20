@@ -141,17 +141,17 @@ class Audit extends Component {
 
         if (this.state.serverError) {
             errorCtrl = <Text style={styles.error}>
-							Something went wrong.
-						</Text>;
+				Something went wrong.
+			</Text>;
         }
 
         if (this.state.showProgress) {
 			loader = <View style={styles.loader}>
-						<ActivityIndicator
-							size="large"
-							animating={true}
-						/>
-					</View>;
+				<ActivityIndicator
+					size="large"
+					animating={true}
+				/>
+			</View>;
         }
 
         return (

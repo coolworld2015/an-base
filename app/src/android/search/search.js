@@ -149,7 +149,8 @@ class Search extends Component {
 									height: 50,
 									width: this.state.width * .94,
 									fontSize: 18,
-									color: 'black'
+									color: 'black',
+									paddingTop: 4
 								}} 
 								placeholder="Search here">
 							</TextInput>
@@ -229,7 +230,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		borderRadius: 5,
-		paddingTop: 2,
 		paddingLeft: 6
 	},		
     button: {
