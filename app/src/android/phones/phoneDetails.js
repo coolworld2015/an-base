@@ -98,64 +98,78 @@ class PhoneDetails extends Component {
 						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								Name:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.name}
-							</Text>		
+							</Text>					
+							<View style={styles.itemWrap}>						
+								<Text style={styles.itemText}>
+									{this.state.name}
+								</Text>		
+							</View>							
 						</View>
 						
 						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								Phone:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.phone}
-							</Text>		
+							</Text>
+							<View style={styles.itemWrap}>	
+								<Text style={styles.itemText}>
+									{this.state.phone}
+								</Text>		
+							</View>
 						</View>
 						
 						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								Street:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.street}
-							</Text>
+							</Text>			
+							<View style={styles.itemWrap}>			
+								<Text style={styles.itemText}>
+									{this.state.street}
+								</Text>
+							</View>
 						</View>
 						
 						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								House:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.house}
-							</Text>		
+							</Text>
+							<View style={styles.itemWrap}>			
+								<Text style={styles.itemText}>
+									{this.state.house}
+								</Text>		
+							</View>
 						</View>
 						
 						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								Apt:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.apt}
-							</Text>		
+							</Text>					
+							<View style={styles.itemWrap}>		
+								<Text style={styles.itemText}>
+									{this.state.apt}
+								</Text>		
+							</View>		
 						</View>		
 						
 						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								Zip:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.index}
-							</Text>		
+							</Text>
+							<View style={styles.itemWrap}>		
+								<Text style={styles.itemText}>
+									{this.state.index}
+								</Text>		
+							</View>
 						</View>
 						
 						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								ID:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.id}
-							</Text>		
+							</Text>			
+							<View style={styles.itemWrap}>		
+								<Text style={styles.itemText}>
+									{this.state.id}
+								</Text>		
+							</View>
 						</View>
 						
 						{validCtrl}
@@ -213,6 +227,11 @@ const styles = StyleSheet.create({
     },
 	itemBlock: {
 		flexDirection: 'row'
+    },		
+	itemWrap: {
+		flex: 1,
+		flexDirection: 'column', 
+		flexWrap: 'wrap'
     },	
     itemTextBold: {
 		fontSize: 20,
@@ -222,11 +241,13 @@ const styles = StyleSheet.create({
 		color: 'black'
     },    
 	itemText: {
+		//width: 230,
 		fontSize: 20,
 		textAlign: 'left',
 		margin: 10,
 		marginLeft: 2,
-		color: 'black'
+		color: 'black',
+ 
     },		
     button: {
         height: 50,
