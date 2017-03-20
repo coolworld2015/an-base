@@ -241,13 +241,11 @@ const styles = StyleSheet.create({
 		color: 'black'
     },    
 	itemText: {
-		//width: 230,
 		fontSize: 20,
 		textAlign: 'left',
 		margin: 10,
 		marginLeft: 2,
-		color: 'black',
- 
+		color: 'black' 
     },		
     button: {
         height: 50,
