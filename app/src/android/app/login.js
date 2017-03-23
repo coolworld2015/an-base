@@ -16,9 +16,7 @@ import {
 class Login extends Component {
     constructor(props) {
         super(props);
-		
-		var width = Dimensions.get('window').width;
-		
+
         this.state = {
             showProgress: false,
 			username: '1',
@@ -107,12 +105,14 @@ class Login extends Component {
         return (
             <ScrollView>
                 <View style={styles.container}>
-					<Image style={styles.logo}
+                    <Image style={styles.logo}
 						source={require('../../../logo.jpg')}
-					/>
-                    <Text style={styles.heading}>
-						RN-Base
-					</Text>
+                    />
+					<View style={styles.headerContainer}>
+						<Text style={styles.heading}>
+							RN-Base
+						</Text>
+					</View>
                     <TextInput
 						underlineColorAndroid='rgba(0,0,0,0)'
                         onChangeText={(text)=> this.setState({
@@ -131,7 +131,7 @@ class Login extends Component {
 							color: 'black',
 							backgroundColor: 'white'
 						}} 
-                        placeholder="Login">1
+                        placeholder='Login'>1
                     </TextInput>
 
                     <TextInput
@@ -152,14 +152,16 @@ class Login extends Component {
 							color: 'black',
 							backgroundColor: 'white'
 						}} 
-                        placeholder="Password" secureTextEntry={true}>1
+                        placeholder='Password' 
+						secureTextEntry={true}>1
                     </TextInput>
 
                     <TouchableHighlight
-                        //onPress={this.onLoginPressed.bind(this)}
                         onPress={()=> this.onLogin()}
-                        style={styles.button}>
-                        <Text style={styles.buttonText}>Log in</Text>
+						style={styles.button}>
+                        <Text style={styles.buttonText}>
+							Log in
+						</Text>
                     </TouchableHighlight>
 
                     {errorCtrl}
@@ -187,28 +189,35 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
         flex: 1
-    },
+    },    
     logo: {
         width: 150,
         height: 150,
         paddingTop: 140,
         borderRadius: 20,
+    },	
+	headerContainer: {
+		justifyContent: 'center',
+		alignItems: 'center'
     },
+
     heading: {
         fontSize: 30,
         marginTop: 10,
 		color: 'black',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+		textAlign: 'center'
     },
     button: {
-        height: 50,
-        backgroundColor: '#48BBEC',
-        borderColor: '#48BBEC',
-        alignSelf: 'stretch',
-        marginTop: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 5
+		height: 50,
+		backgroundColor: '#48BBEC',
+		borderColor: '#48BBEC',
+		alignSelf: 'stretch',
+		marginTop: 10,
+		margin: 5,
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderRadius: 5
     },
     buttonText: {
         color: '#fff',
